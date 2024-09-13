@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Cosas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c4f8ef;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            position: relative;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .header-img {
+            width: 30%;
+            max-height: 80px;
+            object-fit: cover;
+            border-radius: 5px 5px 0 0;
+        }
+        h1 {
+            text-align: center;
+        }
+        .note {
+            color: #007f7f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="header-img" src="/static/logo.png" alt="Encabezado"> <!-- Add your logo file path here -->
+        <h1>Listado de Variables</h1>
+        <ul>
+            <li><span class="bold">Sexo:</span> Escoger 'Hombre' y 'Mujer'.</li>
+            <li><span class="bold">Edad:</span> Insertar la edad con un valor numérico.</li>
+            <li><span class="bold">Estado Civil:</span> Escoger 'Casado/a' y 'Soltero/a'.</li>
+            <li><span class="bold">Número de hijos:</span> Escoger el rango según el número de hijos que se tenga.</li>
+            <li><span class="bold">Nivel Educativo:</span> Escoger el nivel educativo según los años estudiados (Estudios Básicos-Primaria, Estudios Avanzados- Secundaria o Superior, Estudios Superiores-Estudios Universitarios).</li>
+            <li><span class="bold">Miembros Familia:</span> Escoger el rango según el número de personas que viven en la misma casa que la suya.</li>
+            <li><span class="bold">Renta Generada:</span> Insertar los ingresos mensuales del usuario.</li>
+            <li><span class="bold">Bienes en propiedad:</span> Insertar los ingresos mensuales que le reportan los bienes duraderos a disposición del usuario.</li>
+            <li><span class="bold">Ahorros:</span> Insertar los ahorros mensuales del usuario.</li>
+            <li><span class="bold">Gastos esenciales:</span> Insertar los gastos básicos mensuales del usuario.</li>
+            <li><span class="bold">Otros gastos:</span> Insertar otros gastos mensuales del usuario.</li>
+            <li><span class="bold">Asalariado:</span> Indicar si tiene un salario mensual marcando la opción 'Sí', y marcar 'No' en caso contrario.</li>
+            <li><span class="bold">Ppal fuente ingresos: granja propia:</span> Indicar si la principal fuente de ingresos procede de la posesión de una granja propia marcando la opción 'Sí', y marcar 'No' en caso contrario.</li>
+            <li><span class="bold">Ppal fuente ingresos: Negocios:</span> Indicar si la principal fuente de ingresos procede de un negocio no agrícola marcando la opción 'Sí', y marcar 'No' en caso contrario.</li>
+            <li><span class="bold">Ppal fuente ingresos: Otros:</span> Indicar si es el dueño de un negocio no agrícola marcando la opción 'Sí', y marcar 'No' en caso contrario.</li>
+            <li><span class="bold">Ingresos agrícolas:</span> Insertar los ingresos mensuales que se obtienen procedentes de actividades agrícolas.</li>
+            <li><span class="bold">Gastos corrientes agrícolas:</span> Insertar los gastos mensuales en actividades agrícolas.</li>
+            <li><span class="bold">Trabajador por Cuenta Ajena:</span> Indicar si es trabajador por cuenta ajena marcando la opción 'Sí', y marcar 'No' en caso contrario.</li>
+            <li><span class="bold">Inversiones Permanentes:</span> Insertar la cantidad que invierte a largo plazo mensualmente.</li>
+            <li><span class="bold">Inversiones Temporales:</span> Insertar la cantidad que invierte a corto plazo mensualmente.</li>
+        </ul>
+        <p class="note"><span class="bold">NOTA:</span> Se debe tener en cuenta que los datos numéricos que hacen referencia a cantidades de dinero en este fichero están multiplicados x100000 respecto a los datos originales, que estaba en dólares, para evitar los decimales.</p>
+    </div>
+</body>
+</html>

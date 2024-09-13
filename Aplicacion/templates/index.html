@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PsicoPredict</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c4f8ef;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            position: relative;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            min-height: 70px;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            white-space: normal;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            padding: 8px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #0FB9B1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #8ed4c9;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .prediction-container {
+            border: 1px solid #e0e0e0; /* Light grey border */
+            border-radius: 10px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light grey background */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+        .prediction-content {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between title and result */
+        }
+        .prediction-container h2 {
+            margin: 0;
+        }
+        .prediction-result {
+            margin-top:3px
+        }
+        .table-container {
+            margin-top: 20px; /* Space between prediction and table */
+        }
+        .table-container h2 {
+            margin: 0;
+            cursor: pointer;
+            color: #0FB9B1;
+            font-size: 14px; /* Smaller font size */
+            text-decoration: underline; /* Underline the text */
+        }
+        .table-content {
+            display: none;
+            margin-top: 10px;
+        }
+        .table-container:hover .table-content {
+            display: block;
+        }
+        .table-wrapper {
+            border-collapse: collapse;
+            margin-top: 10px;
+            width: 100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #0FB9B1;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e0ecec;
+            font-weight: bold;
+        }
+        td {
+            width: 50%;
+        }
+        .header-img {
+            width: 30%;
+            max-height: 80px;
+            object-fit: cover;
+            border-radius: 5px 5px 0 0;
+        }
+        .top-right-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            background-color: #0FB9B1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .top-right-button:hover {
+            background-color: #8ed4c9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('leyenda') }}" class="top-right-button" target="_blank">Ver Listado</a>
+        <img class="header-img" src="/static/logo.png" alt="Encabezado">
+        <form method="POST">
+            <div class="form-grid">
+                {% for name in variable_names %}
+                <div class="form-group">
+                    <label for="{{ name }}">{{ name }}</label>
+                    {% if name == 'Sexo' %}
+                    <select id="{{ name }}" name="{{ name }}">
+                        <option value="Hombre">Hombre</option>
+                        <option value="Mujer">Mujer</option>
+                    </select>
+                    {% elif name == 'Estado Civil' %}
+                    <select id="{{ name }}" name="{{ name }}">
+                        <option value="Casado/a">Casado/a</option>
+                        <option value="Soltero/a">Soltero/a</option>
+                    </select>
+                    {% elif name == 'Número de hijos' %}
+                    <select id="{{ name }}" name="{{ name }}">
+                        <option value="0-2">0-2</option>
+                        <option value="3-5">3-5</option>
+                        <option value=">5">>5</option>
+                    </select>
+                    {% elif name == 'Nivel Educativo' %}
+                    <select id="{{ name }}" name="{{ name }}">
+                        <option value="Sin Estudios">Sin Estudios</option>
+                        <option value="Estudios Básicos">Estudios Básicos</option>
+                        <option value="Estudios Avanzados">Estudios Avanzados</option>
+                        <option value="Estudios Superiores">Estudios Superiores</option>
+                    </select>
+                    {% elif name == 'Miembros Familia' %}
+                    <select id="{{ name }}" name="{{ name }}">
+                        <option value="0-5">0-5</option>
+                        <option value="6-9">6-9</option>
+                        <option value=">9">>9</option>
+                    </select>
+                    {% elif name == 'Asalariado' or name == 'Ppal fuente ingresos: granja propia' or name == 'Ppal fuente ingresos: Negocios' or name == 'Ppal fuente ingresos: Otros' or name == 'Trabajador por Cuenta Ajena' %}
+                    <select id="{{ name }}" name="{{ name }}">
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                    {% else %}
+                    <input type="text" id="{{ name }}" name="{{ name }}">
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit">Procesar Datos</button>
+        </form>
+        {% if resultado %}
+            <div class="result">
+                <div class="prediction-container">
+                    <div class="prediction-content">
+                        <h2>Predicción:</h2>
+                        <div class="prediction-result">{{ prediccion }}</div>
+                    </div>
+                    <div class="table-container">
+                        <h2>Ver Datos Enviados</h2>
+                        <div class="table-content">
+                            <table class="table-wrapper">
+                                <tbody>
+                                    {% for key, value in resultado.items() %}
+                                    <tr>
+                                        <th>{{ key }}</th>
+                                        <td>{{ value }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
